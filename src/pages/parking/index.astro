@@ -1,83 +1,616 @@
 ---
-export const prerender = true;
+import Layout from '../../layouts/Layout.astro';
+import parking from "../../assets/Floor_41.png";
 
-import Layout from "../../layouts/Layout.astro";
-
-const title = "Shores of Panama Parking Guide | Garage Access, Passes & Instructions";
+const title = "Parking at Shores of Panama | Guest Parking Guide";
 const description =
-  "Official Shores of Panama parking guide including garage access, parking passes, height clearance, and step-by-step instructions for guests.";
-const url = "https://www.shoresofpanama.org/parking";
+  "Complete parking guide for Shores of Panama guests in Panama City Beach. Find dedicated parking on the 4th floor, directions, tips, and everything you need for a smooth arrival.";
+const canonicalUrl = "https://shoresofpanama.org/parking/";
+
+const schemaMarkup = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+      "url": canonicalUrl,
+      "name": title,
+      "description": description,
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://shoresofpanama.org/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Parking",
+            "item": canonicalUrl
+          }
+        ]
+      }
+    },
+    {
+      "@type": "ParkingFacility",
+      "name": "Shores of Panama Parking Garage",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "9900 S Thomas Dr",
+        "addressLocality": "Panama City Beach",
+        "addressRegion": "FL",
+        "postalCode": "32408",
+        "addressCountry": "US"
+      },
+      "description":
+        "On-site covered parking garage at Shores of Panama Resort. Guest reserved spot on the 4th floor.",
+      "url": canonicalUrl
+    }
+  ]
+};
 ---
 
 <Layout title={title} description={description}>
-
-  <!-- SEO META TAGS -->
-  <head>
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={url} />
-
-    <!-- OpenGraph -->
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content={url} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+  </Fragment>
 
-    <!-- JSON-LD -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Shores of Panama Parking Guide",
-        "url": "{url}",
-        "description": "{description}"
-      }
-    </script>
-  </head>
+  <section class="parking-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page">Parking</li>
+        </ol>
+      </nav>
 
-  <section style="max-width: 900px; margin: auto; padding: 2rem;">
-    <h1>Shores of Panama Parking Guide</h1>
-
-    <p>
-      Welcome to the official parking guide for Shores of Panama Resort. This page provides
-      everything you need to know about garage access, parking passes, height clearance,
-      and guest instructions.
-    </p>
-
-    <h2>Garage Access</h2>
-    <p>
-      The parking garage is located on South Thomas Drive with secure gated entry.
-      Guests must have a valid parking pass to enter.
-    </p>
-
-    <h2>Parking Passes</h2>
-    <p>
-      Parking passes are required for all vehicles. Passes are issued at check-in or
-      through your rental provider. Display your pass clearly on the dashboard.
-    </p>
-
-    <h2>Height Clearance</h2>
-    <p>
-      The garage height clearance is 6 feet 10 inches. Oversized vehicles must park
-      in designated exterior areas.
-    </p>
-
-    <h2>Guest Instructions</h2>
-    <ul>
-      <li>Enter through the main garage gate.</li>
-      <li>Display your parking pass at all times.</li>
-      <li>Park only in authorized areas.</li>
-      <li>Do not block walkways or emergency lanes.</li>
-    </ul>
-
-    <p>
-      For additional help, contact your rental provider or the resort front desk.
-    </p>
+      <h1>Parking at Shores of Panama</h1>
+      <p class="hero-subtitle">
+        After arriving and getting your packet at the portico, you will be able to enter the garage directly. 
+        Everything you need to know about arriving, parking, and settling in—
+        so you can get to the beach faster.
+      </p>
+    </div>
   </section>
 
+  <section class="quick-ref" aria-label="Quick parking reference">
+    <div class="container">
+      <div class="quick-ref__grid">
+        <div class="quick-ref__item">
+          <span class="icon" aria-hidden="true">🅿️</span>
+          <strong>Your Spot</strong>
+          <span>4th Floor – Dedicated Reserved Space</span>
+          <span>Max Height 6' 11", Length 18', Width 8' 6"</span>
+        </div>
+        <div class="quick-ref__item">
+          <span class="icon" aria-hidden="true">🏢</span>
+          <strong>Garage Location</strong>
+          <span>On-site, attached to the resort</span>
+        </div>
+        <div class="quick-ref__item">
+          <span class="icon" aria-hidden="true">🚗</span>
+          <strong>Vehicles</strong>
+          <span>1 vehicle per reserved space</span>
+        </div>
+        <div class="quick-ref__item">
+          <span class="icon" aria-hidden="true">🕐</span>
+          <strong>Access</strong>
+          <span>24 hours / 7 days a week</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section parking-spot" id="your-spot">
+    <div class="container">
+      <h2>Your Dedicated Parking Spot</h2>
+      <p>
+        As a guest of this unit, you have access to a <strong>dedicated, reserved
+        parking space on the 4th floor</strong> of the Shores of Panama parking
+        garage. This spot is assigned exclusively for your stay—no hunting for
+        an open space when you arrive.
+      </p>
+
+      <div class="info-card">
+        <h3>Spot Details</h3>
+        <ul>
+          <li><strong>Floor:</strong> 4th Floor</li>
+          <li><strong>Type:</strong> Reserved / Dedicated</li>
+          <li><strong>Access:</strong> Drive directly to Level 4</li>
+          <li><strong>Height Clearance:</strong> Standard garage clearance</li>
+          <li><strong>Additional Vehicles:</strong> One vehicle per reserved space</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section arrival-instructions" id="arrival">
+    <div class="container">
+      <h2>Step-by-Step Arrival Instructions</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <div>
+            <strong>Head to Shores of Panama Resort</strong>
+            <p>Navigate to <strong>9900 S Thomas Dr, Panama City Beach, FL 32408</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div>
+            <strong>Enter the Parking Garage</strong>
+            <p>Follow signage marked <em>"Parking Garage"</em>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div>
+            <strong>Proceed to the 4th Floor</strong>
+            <p>Your dedicated spot will be marked.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div>
+            <strong>Park and Head to the Unit</strong>
+            <p>Take the elevator or stairwell down to the lobby.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">5</span>
+          <div>
+            <strong>Enjoy Your Stay!</strong>
+            <p>Your car is safe and covered for your visit.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section parking-map" id="map">
+    <div class="container">
+      <h2>Parking Map</h2>
+      <p>The map below shows the 4th-floor parking layout.</p>
+
+      <img
+        src={parking.src}
+        alt="4th floor parking map showing the dedicated guest parking spot at Shores of Panama"
+        class="parking-map__img"
+      />
+
+      <p class="map-caption">
+        <em>Your dedicated spot is on the 4th floor.</em>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       TIPS & RULES
+  ====================================================== -->
+  <section class="section tips" id="tips">
+    <div class="container">
+      <h2>Parking Tips &amp; House Rules</h2>
+      <div class="tips__grid">
+        <div class="tip-card">
+          <h3>✅ Do</h3>
+          <ul>
+            <li>Park only in your designated spot on the 4th floor</li>
+            <li>Unload luggage at the resort entrance before parking</li>
+            <li>Keep your vehicle within the painted lines</li>
+            <li>Secure your vehicle—lock doors and windows</li>
+            <li>Contact us immediately if your spot is occupied</li>
+          </ul>
+        </div>
+        <div class="tip-card">
+          <h3>🚫 Please Avoid</h3>
+          <ul>
+            <li>Parking in spots reserved for other units</li>
+            <li>Leaving valuables visible in your vehicle</li>
+            <li>Parking oversized vehicles without prior approval</li>
+            <li>Blocking the garage ramp or fire lanes</li>
+            <li>Allowing unauthorized vehicles to use your spot</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       NEARBY PARKING
+  ====================================================== -->
+  <section class="section nearby" id="nearby">
+    <div class="container">
+      <h2>Need Extra Parking?</h2>
+      <p>
+        If you have more than one vehicle, several public and paid parking
+        options are available near Shores of Panama:
+      </p>
+      <ul>
+        <li>
+          <strong>City of Panama City Beach Public Parking</strong> – Metered
+          and lot parking available along Thomas Drive and Front Beach Road.
+        </li>
+        <li>
+          <strong>Pier Park Parking Garage</strong> – Approx. 2 miles west,
+          free public parking available at the Pier Park shopping area.
+        </li>
+        <li>
+          <strong>SpotHero / ParkWhiz</strong> – Use these apps to find and
+          reserve nearby paid parking in advance.
+        </li>
+      </ul>
+      <p>
+        <em>
+          Note: Off-site parking options are not managed by or affiliated with
+          Shores of Panama. Availability and pricing may vary.
+        </em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       INTERNAL LINKS / CTA
+  ====================================================== -->
+  <section class="section cta-section">
+    <div class="container">
+      <h2>Ready to Plan Your Trip?</h2>
+      <p>
+        Now that parking is sorted, explore everything else Shores of Panama
+        has to offer.
+      </p>
+      <div class="cta-links">
+        <a href="/" class="btn btn--primary">Back to Home</a>
+        <a href="/amenities/" class="btn btn--secondary">Explore Amenities</a>
+        <a href="/local-guide/" class="btn btn--secondary">Local Area Guide</a>
+        <a href="/contact/" class="btn btn--secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /* ====================================================
+     BASE / LAYOUT
+  ==================================================== */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .section:nth-child(even) {
+    background-color: #f7f9fc;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    color: #0a2540;
+  }
+
+  h2 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: #0a2540;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #0066cc;
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0a2540;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #334155;
+    margin-bottom: 1rem;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 1.25rem 1.25rem;
+    color: #334155;
+    line-height: 1.8;
+  }
+
+  /* ====================================================
+     BREADCRUMB
+  ==================================================== */
+  .breadcrumb ol {
+    list-style: none;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    margin: 0 0 1rem;
+    padding: 0;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .breadcrumb a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  /* ====================================================
+     HERO
+  ==================================================== */
+  .parking-hero {
+    background: linear-gradient(135deg, #0a2540 0%, #0066cc 100%);
+    color: #fff;
+    padding: 4rem 0 3rem;
+  }
+
+  .parking-hero h1 {
+    color: #fff;
+  }
+
+  .parking-hero .breadcrumb ol {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .parking-hero .breadcrumb a {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 620px;
+    margin: 0;
+  }
+
+  /* ====================================================
+     QUICK REFERENCE
+  ==================================================== */
+  .quick-ref {
+    background: #0066cc;
+    padding: 1.75rem 0;
+  }
+
+  .quick-ref__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .quick-ref__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    gap: 0.25rem;
+  }
+
+  .quick-ref__item .icon {
+    font-size: 1.75rem;
+  }
+
+  .quick-ref__item strong {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+  }
+
+  .quick-ref__item span:last-child {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* ====================================================
+     INFO CARD
+  ==================================================== */
+  .info-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #0066cc;
+    border-radius: 8px;
+    padding: 1.5rem 1.75rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .info-card ul {
+    margin-bottom: 0;
+  }
+
+  /* ====================================================
+     STEPS
+  ==================================================== */
+  .steps {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .steps li {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    min-width: 2.25rem;
+    background: #0066cc;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    border-radius: 50%;
+  }
+
+  .steps li > div p {
+    margin: 0.25rem 0 0;
+    font-size: 0.98rem;
+  }
+
+  /* ====================================================
+     MAP PLACEHOLDER
+  ==================================================== */
+  .map-placeholder {
+    background: #eef2f7;
+    border: 2px dashed #aac4e0;
+    border-radius: 12px;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .map-placeholder__inner {
+    text-align: center;
+    color: #64748b;
+  }
+
+  .map-placeholder__inner span {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .map-placeholder__inner p {
+    margin: 0;
+    color: #64748b;
+    font-size: 1rem;
+  }
+
+  .map-note {
+    font-size: 0.88rem !important;
+    margin-top: 0.4rem !important;
+  }
+
+  .map-caption {
+    font-size: 0.9rem;
+    color: #64748b;
+    text-align: center;
+  }
+
+  /* ====================================================
+     TIPS GRID
+  ==================================================== */
+  .tips__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 600px) {
+    .tips__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .tip-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .tip-card ul {
+    margin-bottom: 0;
+  }
+
+  /* ====================================================
+     CTA / INTERNAL LINKS
+  ==================================================== */
+  .cta-section {
+    background: linear-gradient(135deg, #0a2540 0%, #0066cc 100%);
+    color: #fff;
+  }
+
+  .cta-section h2 {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .cta-section p {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover {
+    opacity: 0.88;
+  }
+
+  .btn--primary {
+    background: #fff;
+    color: #0066cc;
+  }
+
+  .btn--secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+  }
+  
+    /* ====================================================
+     PARKING MAP IMAGE
+  ==================================================== */
+  .parking-map__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin: 1.5rem 0 1rem;
+  }
+
+</style>

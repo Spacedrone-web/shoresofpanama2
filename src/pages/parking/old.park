@@ -1,0 +1,83 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Shores of Panama Parking Guide | Garage Access, Passes & Instructions";
+const description =
+  "Official Shores of Panama parking guide including garage access, parking passes, height clearance, and step-by-step instructions for guests.";
+const url = "https://www.shoresofpanama.org/parking";
+---
+
+<Layout title={title} description={description}>
+
+  <!-- SEO META TAGS -->
+  <head>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={url} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Shores of Panama Parking Guide",
+        "url": "{url}",
+        "description": "{description}"
+      }
+    </script>
+  </head>
+
+  <section style="max-width: 900px; margin: auto; padding: 2rem;">
+    <h1>Shores of Panama Parking Guide</h1>
+
+    <p>
+      Welcome to the official parking guide for Shores of Panama Resort. This page provides
+      everything you need to know about garage access, parking passes, height clearance,
+      and guest instructions.
+    </p>
+
+    <h2>Garage Access</h2>
+    <p>
+      The parking garage is located on South Thomas Drive with secure gated entry.
+      Guests must have a valid parking pass to enter.
+    </p>
+
+    <h2>Parking Passes</h2>
+    <p>
+      Parking passes are required for all vehicles. Passes are issued at check-in or
+      through your rental provider. Display your pass clearly on the dashboard.
+    </p>
+
+    <h2>Height Clearance</h2>
+    <p>
+      The garage height clearance is 6 feet 10 inches. Oversized vehicles must park
+      in designated exterior areas.
+    </p>
+
+    <h2>Guest Instructions</h2>
+    <ul>
+      <li>Enter through the main garage gate.</li>
+      <li>Display your parking pass at all times.</li>
+      <li>Park only in authorized areas.</li>
+      <li>Do not block walkways or emergency lanes.</li>
+    </ul>
+
+    <p>
+      For additional help, contact your rental provider or the resort front desk.
+    </p>
+  </section>
+
+</Layout>
