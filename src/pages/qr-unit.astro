@@ -69,41 +69,65 @@
       <img id="qrImage">
       <p>Returning in 20 seconds...</p>
     </div>
+	
+	<div id="qrBox" style="display:none;">
+	  <h2 id="unitLabel"></h2>
+	  <img id="qrImage">
+	  <p>Returning in <span id="countdown">20</span> seconds...</p>
+	</div>
 
-    <script>
-      const form = document.getElementById("unitForm");
-      const input = document.getElementById("unitInput");
-      const qrBox = document.getElementById("qrBox");
-      const unitLabel = document.getElementById("unitLabel");
-      const qrImage = document.getElementById("qrImage");
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
+<script>
+  const form = document.getElementById("unitForm");
+  const input = document.getElementById("unitInput");
+  const qrBox = document.getElementById("qrBox");
+  const unitLabel = document.getElementById("unitLabel");
+  const qrImage = document.getElementById("qrImage");
+  const countdown = document.getElementById("countdown");
 
-        const unit = input.value.trim();
-        if (!unit) {
-          alert("Please enter a unit number.");
-          return;
-        }
+  let timer = null;
 
-        const url = `/units/unit${unit}.png`;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-        unitLabel.textContent = `Unit ${unit}`;
-        qrImage.src = url;
+    const unit = input.value.trim();
+    if (!unit) {
+      alert("Please enter a unit number.");
+      return;
+    }
 
-        qrBox.style.display = "block";
+    const url = `/units/unit${unit}.png`;
 
-        qrImage.onerror = () => {
-          window.location.href = "/qr-not-found";
-        };
+    unitLabel.textContent = `Unit ${unit}`;
+    qrImage.src = url;
 
-        setTimeout(() => {
-          qrBox.style.display = "none";
-          input.value = "";
-          input.focus();
-        }, 20000);
-      });
-    </script>
+    qrBox.style.display = "block";
+    countdown.textContent = "20";
+
+    // Redirect if PNG missing
+    qrImage.onerror = () => {
+      window.location.href = "/qr-not-found";
+    };
+
+    // Clear any previous timer
+    if (timer) clearInterval(timer);
+
+    let remaining = 20;
+
+    timer = setInterval(() => {
+      remaining--;
+      countdown.textContent = remaining;
+
+      if (remaining <= 0) {
+        clearInterval(timer);
+        qrBox.style.display = "none";
+        input.value = "";
+        input.focus();
+      }
+    }, 1000);
+  });
+</script>
+
 
   </body>
 </html>
