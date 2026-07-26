@@ -58,70 +58,87 @@
     <h1>Shores of Panama</h1>
 	<h2>Unit QR Viewer</h2>
 
-    <form id="unitForm">
-      <input id="unitInput" type="text" placeholder="Enter Unit Number" autofocus>
-      <br>
-      <button type="submit">Show QR</button>
-    </form>
+	<form id="unitForm" style="display:flex; flex-direction:column; align-items:center;">
+	  <input id="unitInput" type="text" placeholder="Enter Unit Number" autofocus>
+	  <br>
+
+	  <div style="display:flex; align-items:center; gap:20px;">
+		<button type="submit">Show QR</button>
+
+		<!-- Countdown clock next to button -->
+		<span id="countdown" style="font-size:1.6rem; font-weight:bold; color:#0077cc; display:none;">
+		  20
+		</span>
+	  </div>
+	</form>
 	
 	<div id="qrBox" style="display:none;">
 	  <h2 id="unitLabel"></h2>
 	  <img id="qrImage">
-	  <p>Returning in <span id="countdown">20</span> seconds...</p>
 	</div>
 
 
-<script>
-  const form = document.getElementById("unitForm");
-  const input = document.getElementById("unitInput");
-  const qrBox = document.getElementById("qrBox");
-  const unitLabel = document.getElementById("unitLabel");
-  const qrImage = document.getElementById("qrImage");
-  const countdown = document.getElementById("countdown");
+	<script>
+	  const form = document.getElementById("unitForm");
+	  const input = document.getElementById("unitInput");
+	  const qrBox = document.getElementById("qrBox");
+	  const unitLabel = document.getElementById("unitLabel");
+	  const qrImage = document.getElementById("qrImage");
+	  const countdown = document.getElementById("countdown");
 
-  let timer = null;
+	  let timer = null;
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+	  form.addEventListener("submit", (e) => {
+		e.preventDefault();
 
-    const unit = input.value.trim();
-    if (!unit) {
-      alert("Please enter a unit number.");
-      return;
-    }
+		const unit = input.value.trim();
+		if (!unit) {
+		  alert("Please enter a unit number.");
+		  return;
+		}
 
-    const url = `/units/unit${unit}.png`;
+		const url = `/units/unit${unit}.png`;
 
-    unitLabel.textContent = `Unit ${unit}`;
-    qrImage.src = url;
+		unitLabel.textContent = `Unit ${unit}`;
+		qrImage.src = url;
 
-    qrBox.style.display = "block";
-    countdown.textContent = "20";
+		// Show QR box
+		qrBox.style.display = "block";
 
-    // Redirect if PNG missing
-    qrImage.onerror = () => {
-      window.location.href = "/qr-not-found";
-    };
+		// Show countdown next to button
+		countdown.style.display = "inline";
+		countdown.textContent = "20";
 
-    // Clear any previous timer
-    if (timer) clearInterval(timer);
+		// Redirect if PNG missing
+		qrImage.onerror = () => {
+		  window.location.href = "/qr-not-found";
+		};
 
-    let remaining = 20;
+		// Clear previous timer
+		if (timer) clearInterval(timer);
 
-    timer = setInterval(() => {
-      remaining--;
-      countdown.textContent = remaining;
+		let remaining = 20;
 
-      if (remaining <= 0) {
-        clearInterval(timer);
-        qrBox.style.display = "none";
-        input.value = "";
-        input.focus();
-      }
-    }, 1000);
-  });
-</script>
+		timer = setInterval(() => {
+		  remaining--;
+		  countdown.textContent = remaining;
 
+		  if (remaining <= 0) {
+			clearInterval(timer);
+
+			// Hide QR
+			qrBox.style.display = "none";
+
+			// Hide countdown
+			countdown.style.display = "none";
+
+			// Reset input
+			input.value = "";
+			input.focus();
+		  }
+		}, 1000);
+	  });
+	</script>
 
   </body>
 </html>
