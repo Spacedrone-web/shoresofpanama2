@@ -1,11 +1,250 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+export const prerender = true;
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+
+import beach from "../assets/IMG_87011.jpeg";
+import pool from "../assets/IMG_03172.jpeg";
+import night from "../assets/IMG_3913.jpeg";
+import condo from "../assets/livingroom.jpg";
+import condo1 from "../assets/patioview.jpg";
+import amenities from "../assets/amenities.jpeg";
+
+const description =
+  "Overview of Shores of Panama Resort including beachfront access, lagoon pool, condo rentals, and amenities.";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Shores of Panama Resort Overview" description={description}>
+
+<!-- HERO SECTION -->
+<section style="
+  position: relative;
+  height: 85vh;
+  background: url('/hero-sunset.jpg') center 55%/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+">
+  <div style="
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      rgba(0,0,0,0.55),
+      rgba(0,0,0,0.35)
+    );
+  "></div>
+
+  <div style="position: relative; max-width: 900px; padding: 2rem;">
+    <h1 style="font-size: 4.5rem; margin-bottom: 1rem;">
+      Shores of Panama Resort
+    </h1>
+
+    <p style="font-size: 1.4rem; margin-bottom: 2rem;">
+      A Gulf‑front paradise with luxury condos, world‑class amenities, and unforgettable sunsets.
+    </p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section style="max-width: 1200px; margin: auto; padding: 3rem 1rem;">
+
+  <!-- BEACHFRONT ACCESS -->
+  <div style="
+    position: relative;
+    height: 420px;
+    background-color: #000;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    display: flex;
+  ">
+    <div style="flex: 0 0 50%; height: 100%; overflow: hidden;">
+      <img src={beach.src} alt="Direct beachfront access at Shores of Panama Resort"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+
+    <div style="
+      flex: 1;
+      padding: 2rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.25)
+      );
+    ">
+      <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Direct Beachfront Access</h2>
+      <p style="font-size: 1.2rem; line-height: 1.6;">
+        Step directly onto sugar‑white sands with chair rentals, emerald waters,
+        and endless beachfront activities.
+      </p>
+    </div>
+  </div>
+
+  <!-- POOL -->
+  <div style="
+    position: relative;
+    height: 420px;
+    background-color: #000;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    display: flex;
+  ">
+    <div style="
+      flex: 1;
+      padding: 2rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.25)
+      );
+    ">
+      <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">The Best Pool on the Beach</h2>
+      <p style="font-size: 1.2rem; line-height: 1.6;">
+        Our signature 13,966‑sq‑ft lagoon‑style pool is surrounded by tropical landscaping,
+        fountains, and plenty of space to relax.
+      </p>
+    </div>
+
+    <div style="flex: 0 0 50%; height: 100%; overflow: hidden;">
+      <img src={pool.src} alt="The Best Pool on the Beach"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+  </div>
+
+  <!-- BEAUTIFUL CONDOS -->
+  <div style="
+    position: relative;
+    height: 420px;
+    background-color: #000;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    display: flex;
+  ">
+    <div style="
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      background: linear-gradient(
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.25)
+      );
+    ">
+      <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Beautiful Condo Rental</h2>
+      <p style="font-size: 1.2rem; line-height: 1.6;">
+        Private balcony, full kitchen, elegant furnishings, and spacious
+        living areas with Gulf views.
+      </p>
+    </div>
+
+    <div style="flex: 0 0 35%; height: 100%; overflow: hidden;">
+      <img src={condo.src} alt="Condo interior"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+
+    <div style="flex: 0 0 35%; height: 100%; overflow: hidden;">
+      <img src={condo1.src} alt="Pool view"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+  </div>
+
+  <!-- NIGHT ACTIVITIES -->
+  <div style="
+    position: relative;
+    height: 420px;
+    background-color: #000;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    display: flex;
+  ">
+    <div style="flex: 0 0 50%; height: 100%; overflow: hidden;">
+      <img src={night.src} alt="Nighttime beach activities"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+
+    <div style="
+      flex: 1;
+      padding: 2rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.25)
+      );
+    ">
+      <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Nighttime Beach Activities</h2>
+      <p style="font-size: 1.2rem; line-height: 1.6;">
+        Campfires, walks on the beach, crab hunting.
+      </p>
+    </div>
+  </div>
+
+  <!-- AMENITIES -->
+  <div style="
+    position: relative;
+    height: 420px;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    display: flex;
+  ">
+    <div style="flex: 1; height: 100%; overflow: hidden;">
+      <img src={amenities.src} alt="Amenities"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section style="padding: 4rem 2rem; text-align: center; background: #eef6ff;">
+  <h2 style="font-size: 2rem; margin-bottom: 1rem;">
+    Ready to Plan Your Stay?
+  </h2>
+  <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">
+    Explore our rentals, learn about parking, or review guest registration details.
+  </p>
+
+  <a href="https://www.staywithmepcb.com/bare-foot-escape-at-shores-of-panama-1br-w-bunks-orp5b61d5bx"
+    style="
+      background: #0077ff;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display: inline-block;
+    "
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    View Rentals
+  </a>
+</section>
+
+<!-- NAV LINKS -->
+<nav style="display: flex; gap: 1rem; padding: 2rem; justify-content: center;">
+  <a href="/parking">Parking Information</a>
+  <a href="/guest-registration">Guest Registration</a>
+  <a href="/hoa">HOA Information</a>
+  <a href="/rentals">Condo Rentals</a>
+  <a href="/amenities">Amenities</a>
+  <a href="/local-guide">Local Guide</a>
+</nav>
+
 </Layout>
