@@ -10,11 +10,62 @@ import condo from "../assets/livingroom.jpg";
 import condo1 from "../assets/patioview.jpg";
 import amenities from "../assets/amenities.jpeg";
 
+const title = "Shores of Panama Resort | Beachfront Condos, Lagoon Pool & Amenities";
 const description =
-  "Overview of Shores of Panama Resort including beachfront access, lagoon pool, condo rentals, and amenities.";
+  "Shores of Panama Resort in Panama City Beach offers beachfront access, a lagoon-style pool, luxury condo rentals, and resort amenities. Explore parking, guest registration, HOA info, and local guides.";
+const url = "https://www.shoresofpanama.org";
+const heroImage = "/hero-sunset.jpg";
 ---
 
-<Layout title="Shores of Panama Resort Overview" description={description}>
+<Layout title={title} description={description}>
+
+  <!-- SEO META TAGS -->
+  <head>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Shores of Panama, Panama City Beach condos, beachfront resort, lagoon pool, condo rentals, PCB resort, Florida vacation rentals" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={url} />
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={heroImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={heroImage} />
+
+    <!-- JSON-LD Resort Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Resort",
+        "name": "Shores of Panama Resort",
+        "description": "Beachfront resort in Panama City Beach featuring a lagoon-style pool, luxury condos, and full amenities.",
+        "image": "{heroImage}",
+        "url": "{url}",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "9900 S Thomas Dr",
+          "addressLocality": "Panama City Beach",
+          "addressRegion": "FL",
+          "postalCode": "32408",
+          "addressCountry": "US"
+        },
+        "amenityFeature": [
+          { "@type": "LocationFeatureSpecification", "name": "Lagoon Pool", "value": "13,966 sq ft tropical pool" },
+          { "@type": "LocationFeatureSpecification", "name": "Beachfront Access", "value": "Direct access to Gulf of Mexico" },
+          { "@type": "LocationFeatureSpecification", "name": "Condo Rentals", "value": "1BR, 2BR, 3BR units with Gulf views" }
+        ]
+      }
+    </script>
+  </head>
 
 <!-- HERO SECTION -->
 <section style="
@@ -61,7 +112,7 @@ const description =
     display: flex;
   ">
     <div style="flex: 0 0 50%; height: 100%; overflow: hidden;">
-      <img src={beach.src} alt="Direct beachfront access at Shores of Panama Resort"
+      <img src={beach.src} alt="Beachfront access at Shores of Panama Resort with white sand and emerald Gulf waters"
         style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
 
@@ -115,7 +166,7 @@ const description =
     </div>
 
     <div style="flex: 0 0 50%; height: 100%; overflow: hidden;">
-      <img src={pool.src} alt="The Best Pool on the Beach"
+      <img src={pool.src} alt="Lagoon-style pool at Shores of Panama Resort"
         style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
   </div>
@@ -150,12 +201,12 @@ const description =
     </div>
 
     <div style="flex: 0 0 35%; height: 100%; overflow: hidden;">
-      <img src={condo.src} alt="Condo interior"
+      <img src={condo.src} alt="Interior of Shores of Panama condo with modern furnishings"
         style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
 
     <div style="flex: 0 0 35%; height: 100%; overflow: hidden;">
-      <img src={condo1.src} alt="Pool view"
+      <img src={condo1.src} alt="Balcony and pool view from Shores of Panama condo"
         style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
   </div>
@@ -171,7 +222,7 @@ const description =
     display: flex;
   ">
     <div style="flex: 0 0 50%; height: 100%; overflow: hidden;">
-      <img src={night.src} alt="Nighttime beach activities"
+      <img src={night.src} alt="Nighttime beach activities at Shores of Panama Resort"
         style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
 
@@ -204,7 +255,7 @@ const description =
     display: flex;
   ">
     <div style="flex: 1; height: 100%; overflow: hidden;">
-      <img src={amenities.src} alt="Amenities"
+      <img src={amenities.src} alt="Amenities at Shores of Panama Resort"
         style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
   </div>
@@ -241,11 +292,7 @@ const description =
 <nav style="display: flex; gap: 1rem; padding: 2rem; justify-content: center;">
   <a href="/parking">Parking Information</a>
   <a href="/guest-registration">Guest Registration</a>
-  <a href="/hoa">HOA Information</a>
-  <a href="/rentals">Condo Rentals</a>
-  <a href="/amenities">Amenities</a>
   <a href="/local-guide">Local Guide</a>
 </nav>
 
 </Layout>
-
